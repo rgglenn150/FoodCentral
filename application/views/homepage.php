@@ -34,16 +34,10 @@
 					data:{ storeHashes:storeHashArray},
 					async:false,
 					success:function(response)
-					{
+					{	
+						console.log(response);
 						let storeObjects= JSON.parse(response).storeObjects;
 						
-						
-						/* async function processArray(array){
-							array.foreach(item=>{
-								await func
-							});
-						} */
-
 						storeObjects.forEach(store =>{
 							console.log(store.store_name);
 							$('div.storeCard').append(

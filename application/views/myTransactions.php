@@ -5,11 +5,24 @@
       <!-- Jumbotron Header -->
       <header class="jumbotron my-4">
         <h1 class="display-3">Transactions</h1>
-        <p class="lead"><?php echo (isset($storeObj) ? $storeObj->store_description : '') ?></p>
 
+        <table class="table">
+        <thead>
+        <tr>
+            <th>Transaction Type</th>
+            <th>Payment Confirmed</th>
+            <th>Delivered</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody class='transactionTable'>
+
+
+        </tbody>
+    </table>
       </header>
 
-      
+
       <!-- /.row -->
 
     </div>
@@ -44,49 +57,51 @@
 
 
 	<script>
-        function getStores(){};
 
-        function copyStoreAddress() {
-            var copyText = document.getElementById("copyStoreAddress");
-            copyText.select();
-            document.execCommand("copy");
-            alert("Copied the text: " + copyText.value);
+
+
+       var transactionStatus= new Array();
+        function getTransactionStatus(transactionHash=''){
+
+                FoodCentral.getTransactionStatus(transactionHash, function (error, result) {
+                    if (!error) {
+                        transactionStatus.push(result);
+                        
+                    } else {
+                        console.error(error);
+                    }
+                });
         }
 
-        function getProductDetails(productID){
-            $.ajax(
-				{
-					type:"POST",
-					url: "<?php echo base_url() ?>index.php/product/getProduct/"+productID,
-					data:{},
-					async:false,
-					success:function(response)
-					{
-						let storeObjects= JSON.parse(response);
-						
-                        $('span#productName').text(storeObjects.product_name);
-                        $('span#transactionType').text('Food Purchase');
-                        $('span#price').text(storeObjects.price);
-                      //  $('span#productName').text(storeObjects.product_name);
-					},
-					error: function()
-					{
-						alert("Invalid!");
-					}
-				}
-			);
+        function displayTransactionStatus() {
+            setTimeout(() => {
+            for(let x=0;x<transactions.length;x++){
+                getTransactionStatus(transactions[x])
+                $('tbody.transactionTable').append('<tr>'+
+                '    <td>John</td>'+
+                '    <td>Doe</td>'+
+                '    <td>john@example.com</td>'+
+                '    <td>Doe</td>'+
+                '  </tr>');
+                
+                }
+            }, 2000);
+            console.log('test2',transactionStatus);
         }
+
+        displayTransactionStatus();
 
         $(document).ready(function(){
             $('button.getProduct').click(function(){
-               
+
                 getProductDetails(this.id);
             });
 
         });
 
+        function getStores(){};
         getTransactions();
-      
+
 
 	</script>
 

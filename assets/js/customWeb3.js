@@ -316,7 +316,6 @@ if (typeof web3 !== 'undefined') {
     //get all store hashes
     function getStoreHashesFromContract() {
 
-       
         for (let x = 0; x < storeCount; x++) {
 
             FoodCentral.getStoreHashByIndex(x, function (error, result) {
