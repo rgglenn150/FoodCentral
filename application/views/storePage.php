@@ -60,7 +60,7 @@ if (!empty($products)) {
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary saveTransaction">Save Transaction</button>
+            <button type="button" class="btn btn-primary saveTransaction">Add Transaction</button>
         </div>
         </div>
     </div>
@@ -76,7 +76,7 @@ if (!empty($products)) {
             document.execCommand("copy");
             alert("Copied the text: " + copyText.value);
         }
-        
+
         function getProductDetails(productID){
             $.ajax(
 				{
@@ -107,15 +107,10 @@ if (!empty($products)) {
                 getProductDetails(this.id);
             });
 
-
-            
-
-
         });
 
+       
 
-
-        
 	</script>
 
 

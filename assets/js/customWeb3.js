@@ -12,17 +12,22 @@ if (typeof web3 !== 'undefined') {
 
     var FoodCentralContract = web3.eth.contract([
         {
-            "constant": false,
+            "constant": true,
             "inputs": [
                 {
-                    "name": "_storeName",
-                    "type": "string"
+                    "name": "_storeHash",
+                    "type": "bytes32"
                 }
             ],
-            "name": "addStore",
-            "outputs": [],
-            "payable": true,
-            "stateMutability": "payable",
+            "name": "getStoreOwner",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -53,80 +58,13 @@ if (typeof web3 !== 'undefined') {
             "type": "function"
         },
         {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "_transactionHash",
-                    "type": "bytes32"
-                }
-            ],
-            "name": "confirmDelivery",
-            "outputs": [],
-            "payable": true,
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "_transactionHash",
-                    "type": "bytes32"
-                }
-            ],
-            "name": "confirmPayment",
-            "outputs": [],
-            "payable": true,
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "_storeFee",
-                    "type": "uint256"
-                }
-            ],
-            "name": "setStoreFee",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        },
-        {
             "constant": true,
-            "inputs": [
-                {
-                    "name": "index",
-                    "type": "uint256"
-                }
-            ],
-            "name": "getBuyerTransactions",
+            "inputs": [],
+            "name": "isSellerAccount",
             "outputs": [
                 {
                     "name": "",
-                    "type": "bytes32"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "getStoreCount",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint256"
+                    "type": "bool"
                 }
             ],
             "payable": false,
@@ -153,22 +91,17 @@ if (typeof web3 !== 'undefined') {
             "type": "function"
         },
         {
-            "constant": true,
+            "constant": false,
             "inputs": [
                 {
-                    "name": "_storeHash",
+                    "name": "_transactionHash",
                     "type": "bytes32"
                 }
             ],
-            "name": "getStoreOwner",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
+            "name": "confirmPayment",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
             "type": "function"
         },
         {
@@ -200,6 +133,48 @@ if (typeof web3 !== 'undefined') {
             ],
             "payable": false,
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_storeName",
+                    "type": "string"
+                }
+            ],
+            "name": "addStore",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_transactionHash",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "confirmDelivery",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_storeFee",
+                    "type": "uint256"
+                }
+            ],
+            "name": "setStoreFee",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
@@ -235,6 +210,20 @@ if (typeof web3 !== 'undefined') {
         },
         {
             "constant": true,
+            "inputs": [],
+            "name": "getStoreCount",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
             "inputs": [
                 {
                     "name": "_transactionHash",
@@ -251,6 +240,45 @@ if (typeof web3 !== 'undefined') {
             "payable": false,
             "stateMutability": "view",
             "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "getBuyerTransactionLength",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getBuyerTransactions",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bytes32"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "constructor"
         }
     ]);
 
@@ -276,7 +304,7 @@ if (typeof web3 !== 'undefined') {
         console.log(storeCount);
         for (let x = 0; x < storeCount; x++) {
 
-            FoodCentral.getStoreHashByIndex([x], function (error, result) {
+            FoodCentral.getStoreHashByIndex(x, function (error, result) {
                 if (!error) {
                     storeHashes.push((result));
                     console.log('store_hashes ', storeHashes[x]);
@@ -288,6 +316,20 @@ if (typeof web3 !== 'undefined') {
         }
     }
 
+    function testMeta(storeHash,typeOfTrans,itemHash){
+        FoodCentral.addTransaction(storeHash,typeOfTrans,itemHash,{
+            from: web3.eth.accounts[0],
+            value:web3.toWei(0,'finney')
+        }, function (error, result) {
+            if (!error) {
+              console.log(result);
+            } else {
+                console.error(error);
+            }
+        });
+    }
+    
+   // testMeta('0x1c187ce3317c26aa6d6b34c616b92026ad8dad04780fcc3457304f831a009404','Food Purchase','0x52EE629274BCF042B0B7600EC5392CC21E7D826BEAC6D504E0E0482B761F6B55');
 
     
 

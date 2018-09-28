@@ -33,8 +33,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </li>
            
             <li class="nav-item">
-              <a class="nav-link" href="#">Dashboard</a>
+              <a class="nav-link" href="<?php echo site_url() ?>/dashboard/mytransactions">Transactions</a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo site_url() ?>/dashboard/storeTransactions">Seller Transactions</a>
+            </li>
+
           </ul>
         </div>
       </div>
