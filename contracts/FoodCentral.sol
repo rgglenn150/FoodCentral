@@ -65,12 +65,25 @@ contract FoodCentral{
         _;
     }
     
+     function isSellerAccount() public view returns(bool){
+        if(storeOwner[msg.sender].isStoreOwner){
+         return true;   
+        }else{
+        return false;
+        }
+    }
+    
     // Change Store Registration fee
     // Change if sender is contract owner
     function setStoreFee(uint256 _storeFee) public onlyOwner{
         require(_storeFee!=0);
         storeFee=_storeFee;
     }
+    
+    function getStoreFee() public view returns(uint256){
+        return storeFee;
+    }
+    
     
     function getStoreHashByIndex(uint256 _index) public view returns(bytes32){
         return storeArray[_index];
@@ -98,6 +111,7 @@ contract FoodCentral{
         return storeArray.length;
     }
     
+    //for testing only
     function getStoreOwner(bytes32 _storeHash) public view returns(address){
        
         return (store[_storeHash].owner);
@@ -160,6 +174,10 @@ contract FoodCentral{
    
    function getBuyerTransactions(uint256 index) public view returns(bytes32){
        return buyerTransactionsArray[msg.sender][index];
+   }
+   
+   function getBuyerTransactionLength() public view returns(uint){
+       return buyerTransactionsArray[msg.sender].length;
    }
     
     function confirmDelivery(bytes32 _transactionHash) public payable{
