@@ -12,18 +12,22 @@ class Store extends CI_Controller
 
     public function index()
     {
-
-    }
-
-    public function test()
-    {
+        $storeHashes= json_decode($this->input->post('storeHashes'));
         $data = new stdClass();
-        
-        $data->storeObject = $this->Store_Model->get_store();
-        $data->received = $this->input->post('storeHashes');
+        $data->storeObjects = $this->Store_Model->get_store($storeHashes);
+        $data->received = $storeHashes;
         echo json_encode($data);
         exit();
-
     }
+
+    public function view($store_hash){
+       $data['storeObj']=$this->Store_Model->get_store([$store_hash])[0];
+       $data['products'] =$this->Store_Model->get_products($store_hash);
+
+      
+       $this->load->view('storePage',$data);
+    }
+
+   
 
 }

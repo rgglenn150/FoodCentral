@@ -256,13 +256,14 @@ if (typeof web3 !== 'undefined') {
 
 
     var FoodCentral = FoodCentralContract.at('0xe44ef017c66af7bcf4d72dd938ff258d67ea0b25');
-
+    var storeCount;
     var storeHashes = new Array();
 
     //get total store count
     FoodCentral.getStoreCount(function (error, result) {
         if (!error) {
             storeCount = JSON.stringify(result.c[0]);
+            
             getStoreHashesFromContract();
         } else {
             console.error(error);
@@ -270,24 +271,25 @@ if (typeof web3 !== 'undefined') {
     });
 
     //get all store hashes
-     function getStoreHashesFromContract() {
-       
-            console.log(storeCount);
-            for (let x = 0; x < storeCount; x++) {
+    function getStoreHashesFromContract() {
 
-                FoodCentral.getStoreHashByIndex([x], function (error, result) {
-                    if (!error) {
-                        storeHashes.push((result));
-                        console.log('store_hashes ', storeHashes[x]);
-                        if(storeCount==x+1){getStores()};
-                    } else {
-                        console.error(error);
-                    }
-                });
-            }
-       
+        console.log(storeCount);
+        for (let x = 0; x < storeCount; x++) {
 
+            FoodCentral.getStoreHashByIndex([x], function (error, result) {
+                if (!error) {
+                    storeHashes.push((result));
+                    console.log('store_hashes ', storeHashes[x]);
+                    if (storeCount == x + 1) { getStores() };
+                } else {
+                    console.error(error);
+                }
+            });
+        }
     }
+
+
+    
 
 
 } else {
