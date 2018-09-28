@@ -36,7 +36,7 @@
 					success:function(response)
 					{
 						let storeObjects= JSON.parse(response).storeObjects;
-						console.log(storeObjects);
+						
 						
 						/* async function processArray(array){
 							array.foreach(item=>{
@@ -65,7 +65,7 @@
 
 					},
 					error: function()
-					{
+					{	
 						alert("Invalid!");
 					}
 				}

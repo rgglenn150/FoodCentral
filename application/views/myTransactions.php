@@ -63,7 +63,7 @@
 					success:function(response)
 					{
 						let storeObjects= JSON.parse(response);
-						console.log(storeObjects.id);
+						
                         $('span#productName').text(storeObjects.product_name);
                         $('span#transactionType').text('Food Purchase');
                         $('span#price').text(storeObjects.price);
@@ -79,13 +79,14 @@
 
         $(document).ready(function(){
             $('button.getProduct').click(function(){
-                console.log(this.id);
+               
                 getProductDetails(this.id);
             });
 
         });
 
-       
+        getTransactions();
+      
 
 	</script>
 
